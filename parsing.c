@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 10:15:00 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/08/16 11:21:37 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/08/16 14:31:16 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	is_digit(int c)
 	return (c >= '0' && c <= '9');
 }
 
-long	ft_atol(const char *s)
+static long	ft_atoi(const char *s)
 {
 	long	sign;
 	long	r;
@@ -46,11 +46,14 @@ long	ft_atol(const char *s)
 
 static int	set_args(t_args *a, int ac, char **av)
 {
-	a->numb_philo = (int)ft_atol(av[1]);
-	a->time_to_die = ft_atol(av[2]);
-	a->time_to_eat = ft_atol(av[3]);
-	a->time_to_sleep = ft_atol(av[4]);
-	a->numb_time_eat = (ac == 6) ? ft_atol(av[5]) : -1;
+	a->numb_philo = (int)ft_atoi(av[1]);
+	a->time_to_die = ft_atoi(av[2]);
+	a->time_to_eat = ft_atoi(av[3]);
+	a->time_to_sleep = ft_atoi(av[4]);
+	if (ac == 6)
+		a->numb_time_eat = ft_atoi(av[5]);
+	else
+		a->numb_time_eat = -1;
 	if (a->numb_philo <= 0 || a->time_to_die < 0
 		|| a->time_to_eat < 0 || a->time_to_sleep < 0)
 		return (0);

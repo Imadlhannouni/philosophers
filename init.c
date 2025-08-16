@@ -21,13 +21,14 @@ void	assign_forks(t_main *m, int i)
 static void	init_philo(t_main *m, t_args *a, int i)
 {
     m->philos[i].id = i + 1;
+    m->philos[i].main = m;
+    m->philos[i].is_eating = 0;
     m->philos[i].time_to_die = a->time_to_die;
     m->philos[i].time_to_eat = a->time_to_eat;
     m->philos[i].time_to_sleep = a->time_to_sleep;
     m->philos[i].numb_of_eat = a->numb_time_eat;
+    m->philos[i].last_meal = 0;
     assign_forks(m, i);
-    m->philos[i].last_meal = m->start_time;
-    m->philos[i].main = m;
 }
 
 int	init_all(t_main **out, t_args *a)
