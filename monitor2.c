@@ -1,39 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   monitor2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/20 13:39:45 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/08/17 15:06:50 by ilhannou         ###   ########.fr       */
+/*   Created: 2025/08/18 16:59:23 by ilhannou          #+#    #+#             */
+/*   Updated: 2025/08/18 16:59:37 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-static void	join_threads(t_main *m)
+int	check_death(t_main *m)
 {
-	int	i;
+	int	d;
 
-	i = 0;
-	while (i < m->numb_philo)
-		pthread_join(m->philos[i++].thread, NULL);
-}
-
-int	main(int ac, char **av)
-{
-	t_main		*m;
-	t_args		a;
-	pthread_t	mon;
-
-	if (!parse_args(ac, av, &a))
-		return (1);
-	if (!init_all(&m, &a))
-		return (free_all(m), 1);
-	pthread_create(&mon, NULL, &monitor, m);
-	join_threads(m);
-	pthread_join(mon, NULL);
-	free_all(m);
-	return (0);
+	pthread_mutex_lock(&m->dead_mutex);
+	d = m->dead_flag;
+	pthread_mutex_unlock(&m->dead_mutex);
+	return (d);
 }

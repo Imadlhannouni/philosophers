@@ -2,7 +2,8 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   monitor.c                                          :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+      */
+/*                                                    +:+ +:+
+	+:+      */
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 10:18:00 by ilhannou          #+#    #+#             */
@@ -11,16 +12,6 @@
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-int	check_death(t_main *m)
-{
-	int d;
-
-	pthread_mutex_lock(&m->dead_mutex);
-	d = m->dead_flag;
-	pthread_mutex_unlock(&m->dead_mutex);
-	return (d);
-}
 
 void	set_dead(t_main *m)
 {
@@ -38,7 +29,7 @@ void	mark_finished(t_philo *p)
 
 int	all_finished(t_main *m)
 {
-	int d;
+	int	d;
 
 	pthread_mutex_lock(&m->finished_mutex);
 	d = (m->philosophers_finished == m->numb_philo);
@@ -55,13 +46,10 @@ static int	check_one(t_philo *p)
 	pthread_mutex_lock(&p->main->eat_mutex);
 	last = p->last_meal;
 	pthread_mutex_unlock(&p->main->eat_mutex);
-
 	now = get_time_in_ms();
-
 	if (now - last > p->time_to_die)
 	{
 		stamp = now - p->main->start_time;
-
 		pthread_mutex_lock(&p->main->print_mutex);
 		if (!check_death(p->main))
 			printf("%ld %d died\n", (long)stamp, p->id);
@@ -91,7 +79,6 @@ void	*monitor(void *a)
 			set_dead(m);
 			return (NULL);
 		}
-		usleep(500);
 	}
 	return (NULL);
 }

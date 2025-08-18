@@ -6,7 +6,7 @@
 #    By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/22 15:31:30 by ilhannou          #+#    #+#              #
-#    Updated: 2025/08/16 20:30:08 by ilhannou         ###   ########.fr        #
+#    Updated: 2025/08/18 17:10:06 by ilhannou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,8 @@ NAME = philosophers
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread
 
-SRC = main.c parsing.c init.c time_utils.c actions.c routine.c monitor.c free.c
+SRC = main.c parsing.c init.c time_utils.c actions.c routine.c monitor.c monitor2.c free.c \
+	actions2.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)

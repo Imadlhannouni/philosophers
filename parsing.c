@@ -6,7 +6,7 @@
 /*   By: ilhannou <ilhannou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/15 10:15:00 by ilhannou          #+#    #+#             */
-/*   Updated: 2025/08/16 14:31:16 by ilhannou         ###   ########.fr       */
+/*   Updated: 2025/08/18 17:13:35 by ilhannou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,20 +54,20 @@ static int	set_args(t_args *a, int ac, char **av)
 		a->numb_time_eat = ft_atoi(av[5]);
 	else
 		a->numb_time_eat = -1;
-	if (a->numb_philo <= 0 || a->time_to_die < 0
-		|| a->time_to_eat < 0 || a->time_to_sleep < 0)
+	if (a->numb_philo <= 0 || a->time_to_die < 0 || a->time_to_eat < 0
+		|| a->time_to_sleep < 0 || a->numb_time_eat == 0)
 		return (0);
 	return (1);
 }
 
 int	parse_args(int ac, char **av, t_args *a)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	if (ac < 5 || ac > 6)
 		return (printf("Usage: %s <nb_philo> <time_to_die> <time_to_eat> "
-			"<time_to_sleep> [must_eat]\n", av[0]), 0);
+				"<time_to_sleep> [must_eat]\n", av[0]), 0);
 	i = 1;
 	while (i < ac)
 	{

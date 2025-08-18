@@ -14,7 +14,7 @@
 
 void	free_all(t_main *m)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!m)

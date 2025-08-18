@@ -15,7 +15,7 @@
 
 time_t	get_time_in_ms(void)
 {
-	struct timeval		v;
+	struct timeval	v;
 
 	gettimeofday(&v, NULL);
 	return ((v.tv_sec * 1000) + (v.tv_usec / 1000));
@@ -23,8 +23,9 @@ time_t	get_time_in_ms(void)
 
 void	ft_usleep(t_philo *p, long ms)
 {
-	time_t start = get_time_in_ms();
+	time_t	start;
 
+	start = get_time_in_ms();
 	while (!check_death(p->main))
 	{
 		if ((get_time_in_ms() - start) >= ms)
